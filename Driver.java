@@ -2,36 +2,31 @@ import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import net.dv8tion.jda.api.events.GenericEvent;
-import net.dv8tion.jda.api.events.ReadyEvent;
-import net.dv8tion.jda.api.hooks.EventListener;
-
-import javax.annotation.Nonnull;
-
 /**
  * Driver class for the program
  *
  */
 
-public class Driver implements EventListener{
+public class Driver {
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) {
 
-        //Create a new bot
-        new Bot();
         // Creates new instance on start up
         Crud crud = Crud.getInstance();
         CustOrder order = CustOrder.getInstance();
         //creates Read object
         Read reader = new Read();
         Delete deleter = new Delete();
+
         Scanner sc = new Scanner(System.in);
         String id;
         String email;
+        int quant;
         Connection connInventory = null;
         Connection connCustomer = null;
         connInventory = crud.connect();
         connCustomer = order.connect();
+
         String optionNum = "";
 
         /**
@@ -147,11 +142,5 @@ public class Driver implements EventListener{
         System.out.println("6) Read Customer Order");
         System.out.println("7) Delete Customer Order");
         System.out.println("8) Quit");
-    }
-
-    public void onEvent(GenericEvent event) {
-        if (event instanceof ReadyEvent){
-            System.out.println("Bot has connected");
-        }
     }
 }
